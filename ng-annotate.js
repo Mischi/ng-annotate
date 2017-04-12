@@ -34,6 +34,13 @@ const optimist = require("optimist")
     .options("sourceroot", {
         describe: "set the sourceRoot property of the generated sourcemap"
     })
+    .options("sourcetype", {
+        describe: "mode the code should be parsed in (\"script\" or \"module\")",
+    })
+    .options("ecmaversion", {
+        describe: "ECMAScript version to parse\n" +
+        "Must be either 3, 5, 6 (2015), 7 (2016), or 8 (2017).",
+    })
     .options("single_quotes", {
         boolean: true,
         describe: "use single quotes (') instead of double quotes (\")",
@@ -132,7 +139,8 @@ function runAnnotate(err, src) {
         config.inFile = filename;
     }
 
-    ["add", "remove", "o", "regexp", "rename", "single_quotes", "plugin", "enable", "stats"].forEach(function(opt) {
+    ["add", "remove", "o", "regexp", "rename", "single_quotes", "plugin",
+        "enable", "stats", "sourcetype", "ecmaversion"].forEach(function(opt) {
         if (opt in argv) {
             config[opt] = argv[opt];
         }

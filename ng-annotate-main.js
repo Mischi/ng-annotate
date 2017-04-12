@@ -1075,7 +1075,8 @@ module.exports = function ngAnnotate(src, options) {
         stats.parser_parse_t0 = Date.now();
         // acorn
         ast = parser(src, {
-            ecmaVersion: 6,
+            ecmaVersion: options.ecmaversion || 6,
+            sourceType: options.sourcetype || 'script',
             allowReserved: true,
             locations: true,
             ranges: true,
