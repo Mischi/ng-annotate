@@ -151,6 +151,11 @@ function run(ngAnnotate) {
     console.log("testing removing annotations (imported tests)");
     test(ngminOriginal, ngAnnotate(ngminAnnotated, {remove: true, regexp: "^myMod"}).src, "ngmin_original.js");
 
+    console.log("testing sourcetype 'module'");
+    const stm = slurp("tests/sourcetype-module.js");
+    const stmAnnotated = ngAnnotate(stm, { add: true, sourcetype: "module" }).src;
+    test(slurp("tests/sourcetype-module.annotated.js"), stmAnnotated, "sourcetype-module.annotated.js");
+
     // TODO generic test-runner code for finding and testing all optionals automatically
     // optionals angular-dashboard-framework adding annotations
     console.log("testing optionals/angular-dashboard-framework.js (adding annotations)");
